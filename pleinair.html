@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Plein Air">
+<meta name="theme-color" content="#111111">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACsklEQVR42u3dsQnCQBSAYVcIiIUEh7AUexdxOmtXcBe3UBDSCZrLe+Eu+Yq/9AjhE86Ee266rntJS2njJghoCWgJaAloAS0BLQEtAS0BLaAloCWgJaAloAW0BLQEtAS0BLSAloCWgJaAloAW0BLQEtAS0BLQArqOzqejZg5ooIEGGmiggRbQQAtooIEGGmiggZ4Aut9vVRjQQAMNNNBAAw000EALaKCBBhpooIEGGmiggQYaaAG9PNDPxyW8++36qbW1gQYaaKCBBhpooIEGGmiggQYaaKCBBroB0Id+V9SArvTzmWsDDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw30KkBHfjEy1gUa6BAs0ZgzrhFooP+Ckgk68jqBXgDoYU86tTEHXGtY91tAAw000OvccmT8iLPlANoeGmigp2LJemznKQfQs7xYicYcuS7QQHtTCDTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAPtTCHQQDv1DbS5HOZyAG1yEtBAm21nth3QQANty2EPDbQJ/ib4A+0/VvzHCtDeFAINNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDXTLoEsbc8C1prWBBhpooIEGGmiggQYaaKCBBhpooIEGuhLQ+h3QQAMNNNBAAw000EALaKCBBhpooIEGGmiggQYaaAHdLmjlBDTQQAMNNNBAC2igBTTQQAMNNNBAS0BLQAtoCWgJaAloAe0mCGgJaAloCWgBLQEtAS0BLQEtoCWgJaAloCWgBbQEtAS0BLQEtICWgJaAlmJ6A9C/oJG+1BMGAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAC+klEQVR42u3dMQrCMBSA4V4hIA5SPISjuHsRT+fsFbxLb6F0cHGQYPJqbL7hX4OUfBjb8hxSSg+p1wYXQQBIAEgASABIAEgASABIAEgASABIAEgASABIAEgASABIAEgASABIAEgASABIAEgASABIAEgASABIAEgASABIAHzqdDyokQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgMUBjLuNKgcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQJYLqfw7pdL3+9PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsHoA+3Fb1LxBS9eIXh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDX5ooEUOszAgBAVQARmKLWBwCAqgAiv1Ei1gcAgGobKmfSQtTmj/jMAHQAYP4hWavcUSatrv8eAAAAAIAjkCMQAAAAAAAA7gIBAIDnAAAA4FUIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEyFMBUCAHOBzAUCwGQ4k+EAAAAAAEyHNh0aAAAAAMARyBEIAHeB3AUCwHMAzwEA8D/BAADgVQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA4BlJY7yqTV9QEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgFUA0HcBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/A6BlAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQABICLoJ57Ap299vnoQ6+zAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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AAgABIAAEAACQAAgABAAAkAACAABgABAAAgAASAABAACAAEgAASAABAACAAEgAAQAAJAACAAEAACQAAIAAGAAEAACAABIAAEAAIAASAABIAAEAAIAASAABAAAkAAIAAQAAJAAAgAAYAAQAAYQPcLAAGAAEAAGED3CwABgAAQAALAALpfAAgAAYAAEAAG0P0CQAAIAASAADCA7hcACAAEgAAwgO4XAAgABIAAEAACQAAgABAAAkAACAABgABAAAgAASAABAACAAEgAASAABAACAAEgAAQAAJAACAAEAACQAAIAAGAAEAACAABIAAEAAIAASAABIAAEAAIAASAABAAAkAAIAAQAAJAAAgAAYAAQAAIAAEgAAQAAgABYADdLwAEAAIAAWAA3S8ABAACQAAIAAPofgEgAASAF0EACAAD6H4BIAAEAAJAABhA9wsABAACQAAYQPcLAAQAAkAACAABIAAQAAgAASAABIAAQAAgAASAABAAAgABgAAQAAJAAAgABAACQAAIAAEgABAACAABIAAEgABAACAABIAAEAACAAGAABAAAkAACAAEAAJAAAgAASAAEAAIAAEgAASAAEAAIAAEgAAQAAIAAYAAMIDuFwACAAGAADCA7hcAAgABIAAEgAF0vwAQAAgAASAADKD7BYAAEAAIAAFgAN0vAPy8FAAIAAFgAN0vABAACAABIAAEgABAACAABIAAEAACAAGAABAAAkAACAAEAAJAAFw1JE3Dn/TcBAACAAEgAHYbj5bRT36GAgABgAAoD4CWtzMa7hcACAAEgABYNhit45/6PAUAAgABEB4ArX/YmHy/AEAAIAAEwNKhmBYBqfcLAAQAAkAALB/A1r+UFwACAAGAABgxFLcawPYASHy2AgABgAAwEhERkH67AEAAIAAEwF0GsD0A0p6vAEAAIAAMhAAQAAIAAYAAMBACQAAIAAQA4QGwfSFMihUD6P6c/y8CAAGAABAAAkAACAAEAN4C8CtibwF4C0AAIAAQAAJAAAgAAYAAQAAIAAEgAAQAAgAB4IOAfBCQABAACAAEgI/Cdb8AEAAIAASAAXS/ABAACAABIAB8Ha77BYAAQAAIAAEwZCwmjX/y/QIAAYAAEADLBmPi+KfeLwAQAAgAAbBkNCaPf+L9AgABgAAQADcdj4ThT7xfACAAEAAC4CZDkjj8SbcLAAQAAkAA7GL7QpiG0U+5XwAgABAAAkAACAABgABAAAgAASAABAACAAEgAASAABAACAAEgAAQAAJAACAAEAACQAAIAAGAAEAACAABIAAEAAIAASAABIAAEAAIAASAABAAAkAAIAAQAAJAAAgAAYAAQAAIAAEgAAQAAgABIAAEgAAQAAgABIABdL8AEAAIAASAAXS/ABAACAABIAAMoPsFgAAQAAgAAWAA3S8ABIAAQAAIAAPofgGAAEAACAAD6H4BgABAAAgAASAABAACAAEgAASAABAACAAEgAAQAAJAACAAEAACQAAIAAGAAEAACAABIAAEAAIAASAABIAAEAAIAASAABAAAkAAIAAQAAJAAAgAAYAAQAAIAAEgAAQAAgABIAAEgAAQAAgABIAAEAACQAAgABAABtD9AkAAIAAQAAbQ/QJAACAABIAAMIDuFwACQAB4EQSAADCA7hcAAkAAIAAEgAF0vwBAACAABIABdL8AQAAgAASAABAAAgABgAAQAAJAAAgABAACQAAIAAEgABAACAABIAAEgABAACAABIAAEAACAAGAABAAAkAACAAEAAJAAAgAASAAEAAIAAEgAASAAEAAIAAEgAAQAAIAAYAAEAACQAAIAAQAAkAACAABIAAQAAgAA+h+ASAAEAAIAAPofgEgABAAAiA9ACbZBtD9vfcLAAQAAsAAul8ACAAEAALAALpfAAgABAACwAC6XwAIAAQAAsAAul8ACAAEAALAALpfAAgABAACwAC6XwAIAAQAAsAAul8ACAAEgAAQAAbQ/QJAACAABIAAMIDuFwACQAAgAASAAXS/ABAAAgABIAAMoPsFAAIAASAADKD7BQACAAEgAAyg+wUAAgABIAAMoPsFAAIAASAADKD7BQACAAEgAAyg+wUAAgABIAAMoPsFAAIAAWAA3S8ABAACAAFgAN0vAAQAAoD8AAAEAAIAAQAIAAQAAgAQAAgABAAgABAACABAACAAEAAgAAQAAgABAAJAACAAEAAgAAQAAkAACAAQAAJAACAABAAIAAEgABAAAgAEAAIAASAAQAAgABAAAgAEAAIAAQAIAAQAAgAQAAgABAAgABAACABAACAAEACAAEAAIAAAAYAAQAAAAgABgAAABAACAAEACAAEAAIABIAAQAAgAEAACAAEAAIABIAAQAAIAAEAAkAACAAvggAQACAABIAAQAAA1fy8FAAIAEAAIAAQAIAAQAAgAAABgABAAAACAAGAAAAEAAIAAQAIAAQAAgAQAAgABAAgABAACABAACAAEACAAEAAIAAAAYAAQAAAAgABgAAABAACAAEACAAEgAAAEAAIAAEAIAAEAAIAQAAIAAQAIAAQAAgAQAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAEAAeCEAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAEABeBAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAABAAAAAAgAAEAAAgAAAACb7A+KFij66F/UgAAAAAElFTkSuQmCC">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Plein Air</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:    #111;
+  --surf:  #1c1c1c;
+  --surf2: #242424;
+  --brd:   #333;
+  --text:  #e8e8e8;
+  --dim:   #777;
+  --acc:   #e8c547;
+  --acc2:  rgba(232,197,71,.12);
+  --nav-h: 56px;
+  --hdr-h: 48px;
+  --f:     'DM Sans', system-ui, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--f);font-size:13px;-webkit-text-size-adjust:100%}
+
+/* HEADER */
+#hdr{position:fixed;top:0;left:0;right:0;height:var(--hdr-h);background:var(--surf);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 14px;gap:10px;z-index:100}
+#hdr .logo{font-size:.88rem;font-weight:600;letter-spacing:.02em;color:var(--text)}
+#hdr .sub{font-size:.55rem;font-weight:400;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+#openBtn{margin-left:auto;background:var(--acc);border:none;border-radius:6px;color:#111;font-family:var(--f);font-size:.65rem;font-weight:600;padding:7px 13px;cursor:pointer;letter-spacing:.02em}
+#openBtn:active{opacity:.75}
+#fileInput{display:none;position:absolute}
+
+/* NAV */
+#nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:var(--surf);border-top:1px solid var(--brd);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0)}
+#nav button{flex:1;background:none;border:none;color:var(--dim);font-family:var(--f);font-size:.5rem;font-weight:500;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-top:2px solid transparent;transition:color .15s,border-color .15s;padding-bottom:4px}
+#nav button .ico{font-size:1.1rem;line-height:1}
+#nav button.active{color:var(--acc);border-top-color:var(--acc)}
+
+/* MAIN */
+#main{position:fixed;top:var(--hdr-h);bottom:var(--nav-h);left:0;right:0;overflow:hidden}
+.panel{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .18s}
+.panel.active{opacity:1;pointer-events:all}
+
+/* EMPTY */
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px}
+.empty .ico{font-size:2.6rem}
+.empty p{font-size:.7rem;color:var(--dim);text-align:center;line-height:1.8;font-weight:300}
+.empty .ubtn{background:var(--acc);color:#111;border:none;border-radius:7px;font-family:var(--f);font-weight:600;font-size:.72rem;padding:11px 22px;cursor:pointer}
+
+/* TOOLBAR */
+.toolbar{background:var(--surf2);border-bottom:1px solid var(--brd);padding:7px 10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;flex-shrink:0}
+.pill{background:var(--surf);border:1px solid var(--brd);border-radius:20px;color:var(--dim);font-family:var(--f);font-size:.6rem;font-weight:500;padding:4px 10px;cursor:pointer;transition:all .12s;white-space:nowrap}
+.pill.on{border-color:var(--acc);color:var(--acc);background:var(--acc2)}
+.tsep{width:1px;height:16px;background:var(--brd);flex-shrink:0}
+.tlbl{font-size:.52rem;font-weight:500;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;flex-shrink:0}
+.pinp{display:flex;align-items:center;gap:3px}
+.pinp input{width:42px;background:var(--surf);border:1px solid var(--brd);border-radius:4px;color:var(--text);text-align:center;font-family:var(--f);font-size:.7rem;font-weight:500;padding:4px 2px;outline:none;transition:border-color .12s}
+.pinp input:focus{border-color:var(--acc)}
+.pinp span{color:var(--dim);font-size:.7rem}
+.obtn{background:var(--surf);border:1px solid var(--brd);border-radius:4px;color:var(--dim);font-family:var(--f);font-size:.62rem;font-weight:500;padding:4px 8px;cursor:pointer;transition:all .12s}
+.obtn.on{border-color:#555;color:var(--text);background:var(--surf2)}
+
+/* CANVAS */
+.carea{flex:1;overflow:hidden;position:relative;background:#0a0a0a;display:flex;align-items:center;justify-content:center}
+.carea canvas{display:block;touch-action:none}
+.savbtn{position:absolute;bottom:8px;right:8px;z-index:10;background:rgba(17,17,17,.88);border:1px solid var(--brd);border-radius:5px;color:var(--dim);font-family:var(--f);font-size:.55rem;font-weight:500;padding:5px 10px;cursor:pointer;backdrop-filter:blur(4px);transition:all .12s}
+.savbtn:active{color:var(--acc);border-color:var(--acc)}
+
+/* SLIDERS */
+.stoolbar{background:var(--surf2);border-bottom:1px solid var(--brd);padding:8px 12px;flex-shrink:0}
+.slrow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.slrow:last-child{margin-bottom:0}
+.slrow label{font-size:.55rem;font-weight:500;color:var(--dim);width:68px;flex-shrink:0;letter-spacing:.03em;text-transform:uppercase}
+.slrow input[type=range]{flex:1;accent-color:var(--acc);cursor:pointer;height:2px}
+.slrow .sv{font-size:.6rem;font-weight:600;color:var(--acc);width:28px;text-align:right;flex-shrink:0}
+.prow{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap}
+
+/* ETAPAS */
+.etabs{display:flex;background:var(--surf2);border-bottom:1px solid var(--brd);flex-shrink:0}
+.etab{flex:1;padding:9px 3px;background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);cursor:pointer;font-family:var(--f);font-size:.52rem;font-weight:500;letter-spacing:.03em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s}
+.etab .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.etab.active{color:var(--text);border-bottom-color:var(--acc)}
+.einfo{background:var(--surf2);border-bottom:1px solid var(--brd);padding:8px 12px;flex-shrink:0}
+.einfo .ename{font-size:.68rem;font-weight:600;color:var(--text);margin-bottom:3px}
+.einfo .edesc{font-size:.56rem;font-weight:300;color:var(--dim);line-height:1.65}
+
+/* THRESHOLD */
+.thr-toolbar{background:var(--surf2);border-bottom:1px solid var(--brd);padding:10px 14px;flex-shrink:0}
+.thr-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.thr-top .tlbl{margin:0}
+.tones-row{display:flex;gap:6px}
+.tone-btn{width:36px;height:36px;border-radius:6px;border:1.5px solid var(--brd);background:var(--surf);color:var(--dim);font-family:var(--f);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:center}
+.tone-btn.on{border-color:var(--acc);color:var(--acc);background:var(--acc2)}
+.thr-swatches{display:flex;gap:4px;flex-wrap:wrap}
+.thr-swatch{height:28px;border-radius:4px;flex:1;min-width:24px;transition:flex .2s}
+.hint{background:var(--surf2);border-top:1px solid var(--brd);padding:5px 12px;flex-shrink:0}
+.hint p{font-size:.5rem;font-weight:300;color:var(--dim);line-height:1.6}
+.hint span{color:var(--acc);font-weight:500}
+</style>
+</head>
+<body>
+
+<div id="hdr">
+  <span class="logo">Plein Air</span>
+  <span class="sub">Auxiliar</span>
+  <button id="openBtn" onclick="document.getElementById('fileInput').click()">📷 Foto</button>
+  <input type="file" id="fileInput" accept="image/*" onchange="loadPhoto(this)">
+</div>
+
+<div id="main">
+
+  <!-- ══ ENQUADRAMENTO ══ -->
+  <div class="panel active" id="panel-eq">
+    <div class="empty" id="eq-empty">
+      <div class="ico">📐</div>
+      <p>Tire uma foto ou abra da galeria<br>para enquadrar no seu papel</p>
+      <button class="ubtn" onclick="document.getElementById('fileInput').click()">📷 Abrir foto</button>
+    </div>
+    <div style="display:none;flex-direction:column;height:100%" id="eq-content">
+      <div class="toolbar">
+        <span class="tlbl">Papel</span>
+        <div class="pinp">
+          <input type="number" id="pw" value="21" min="1" max="200" step="0.1" oninput="onPaperChange()">
+          <span>×</span>
+          <input type="number" id="ph" value="29.7" min="1" max="200" step="0.1" oninput="onPaperChange()">
+          <span style="font-size:.52rem;color:var(--dim)">cm</span>
+        </div>
+        <button class="obtn on" id="orientBtn" onclick="toggleOrient()">↕ Ret.</button>
+        <div class="tsep"></div>
+        <button class="pill on" id="btn-tercos" onclick="toggleOv('tercos')">Terços</button>
+        <button class="pill" id="btn-diag" onclick="toggleOv('diag')">Diag.</button>
+        <button class="pill" id="btn-centro" onclick="toggleOv('centro')">Centro</button>
+      </div>
+      <div class="carea" id="eq-area">
+        <canvas id="eq-canvas"></canvas>
+        <button class="savbtn" onclick="saveCanvas('eq-canvas','enquadramento.png')">⬇ Salvar</button>
+      </div>
+      <div class="hint">
+        <p><span>Dentro da máscara</span> — arrastar &nbsp;·&nbsp; <span>Pinçar</span> — redimensionar &nbsp;·&nbsp; <span>Fora</span> — mover imagem</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ VALORES TONAIS ══ -->
+  <div class="panel" id="panel-valores">
+    <div class="empty" id="ft-empty">
+      <div class="ico">🎛</div>
+      <p>Abra uma foto para<br>analisar os valores tonais</p>
+      <button class="ubtn" onclick="document.getElementById('fileInput').click()">📷 Abrir foto</button>
+    </div>
+    <div style="display:none;flex-direction:column;height:100%" id="ft-content">
+      <div class="stoolbar">
+        <div class="prow">
+          <button class="pill on" onclick="applyPreset('original',this)">Original</button>
+          <button class="pill" onclick="applyPreset('squint',this)">Squint</button>
+          <button class="pill" onclick="applyPreset('notan',this)">Notan</button>
+          <button class="pill" onclick="applyPreset('valores',this)">Valores</button>
+        </div>
+        <div class="slrow"><label>Brilho</label><input type="range" id="sl-b" min="-100" max="100" value="0" oninput="onSlider()"><span class="sv" id="sv-b">0</span></div>
+        <div class="slrow"><label>Contraste</label><input type="range" id="sl-c" min="-100" max="100" value="0" oninput="onSlider()"><span class="sv" id="sv-c">0</span></div>
+        <div class="slrow"><label>Desfoque</label><input type="range" id="sl-d" min="0" max="8" value="0" step="1" oninput="onSlider()"><span class="sv" id="sv-d">0</span></div>
+        <div class="slrow"><label>P&amp;B</label><input type="range" id="sl-p" min="0" max="100" value="0" oninput="onSlider()"><span class="sv" id="sv-p">0</span></div>
+      </div>
+      <div class="carea" id="ft-area">
+        <canvas id="ft-canvas"></canvas>
+        <button class="savbtn" onclick="saveCanvas('ft-canvas','valores.png')">⬇ Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ETAPAS ══ -->
+  <div class="panel" id="panel-etapas">
+    <div class="empty" id="et-empty">
+      <div class="ico">🎨</div>
+      <p>Abra uma foto para ver<br>as etapas da pintura</p>
+      <button class="ubtn" onclick="document.getElementById('fileInput').click()">📷 Abrir foto</button>
+    </div>
+    <div style="display:none;flex-direction:column;height:100%" id="et-content">
+      <div class="etabs">
+        <button class="etab active" onclick="selectEtapa(0,this)"><div class="dot" style="background:#f0f0f0;border:1px solid #888"></div>Brancos</button>
+        <button class="etab" onclick="selectEtapa(1,this)"><div class="dot" style="background:#b8b8b8"></div>Claros</button>
+        <button class="etab" onclick="selectEtapa(2,this)"><div class="dot" style="background:#707070"></div>Meios</button>
+        <button class="etab" onclick="selectEtapa(3,this)"><div class="dot" style="background:#1e1e1e;border:1px solid #555"></div>Escuros</button>
+      </div>
+      <div class="einfo">
+        <div class="ename" id="et-name">1ª Lavagem — Brancos e Luz Máxima</div>
+        <div class="edesc" id="et-desc">Áreas que você NÃO pinta. O papel em branco que representa a luz mais intensa.</div>
+      </div>
+      <div class="carea" id="et-area">
+        <canvas id="et-canvas"></canvas>
+        <button class="savbtn" onclick="saveCanvas('et-canvas','etapa.png')">⬇ Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ THRESHOLD ══ -->
+  <div class="panel" id="panel-threshold">
+    <div class="empty" id="th-empty">
+      <div class="ico">◑</div>
+      <p>Abra uma foto para ver<br>os planos de valor simplificados</p>
+      <button class="ubtn" onclick="document.getElementById('fileInput').click()">📷 Abrir foto</button>
+    </div>
+    <div style="display:none;flex-direction:column;height:100%" id="th-content">
+      <div class="thr-toolbar">
+        <div class="thr-top">
+          <span class="tlbl">Número de tons</span>
+          <div class="tones-row" id="tones-row">
+            <button class="tone-btn" onclick="setTones(3,this)">3</button>
+            <button class="tone-btn" onclick="setTones(4,this)">4</button>
+            <button class="tone-btn on" onclick="setTones(5,this)">5</button>
+            <button class="tone-btn" onclick="setTones(6,this)">6</button>
+            <button class="tone-btn" onclick="setTones(7,this)">7</button>
+          </div>
+        </div>
+        <div class="thr-swatches" id="thr-swatches"></div>
+      </div>
+      <div class="carea" id="th-area">
+        <canvas id="th-canvas"></canvas>
+        <button class="savbtn" onclick="saveCanvas('th-canvas','threshold.png')">⬇ Salvar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="nav">
+  <button class="active" onclick="switchTab('eq',this)"><span class="ico">📐</span>Enquadra</button>
+  <button onclick="switchTab('valores',this)"><span class="ico">🎛</span>Valores</button>
+  <button onclick="switchTab('etapas',this)"><span class="ico">🎨</span>Etapas</button>
+  <button onclick="switchTab('threshold',this)"><span class="ico">◑</span>Threshold</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+const S = {
+  img: null,
+  tab: 'eq',
+  paperW: 21, paperH: 29.7,
+  orient: 'portrait',
+  ov: { tercos:true, diag:false, centro:false },
+  mask: { x:0, y:0, w:0, h:0 },
+  imgOff: { x:0, y:0 },
+  filters: { b:0, c:0, d:0, p:0 },
+  etapa: 0,
+  tones: 5,
+};
+
+const ETAPAS = [
+  { name:'1ª Lavagem — Brancos e Luz Máxima',  desc:'Áreas que você NÃO pinta. O papel em branco que representa a luz mais intensa. Identifique e preserve desde o início.', min:210, max:255 },
+  { name:'2ª Lavagem — Tons Claros',            desc:'Primeira camada muito diluída. Estabelece a temperatura de luz e os tons mais aéreos da composição.', min:140, max:209 },
+  { name:'3ª Etapa — Meios-tons',               desc:'Volume e estrutura. A maior área da pintura — onde vive a narrativa cromática e os planos do espaço.', min:70,  max:139 },
+  { name:'4ª Etapa — Escuros e Acentos Finais', desc:'Última camada, mais saturada. Sombras profundas, contornos decisivos, os acentos que dão peso à composição.', min:0,   max:69  },
+];
+
+const PRESETS = {
+  original: { b:0,   c:0,   d:0, p:0   },
+  squint:   { b:-10, c:40,  d:3, p:0   },
+  notan:    { b:0,   c:100, d:0, p:100 },
+  valores:  { b:10,  c:25,  d:0, p:70  },
+};
+
+// ═══════════════════════════════════════════
+// LOAD PHOTO
+// ═══════════════════════════════════════════
+function loadPhoto(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      S.img = img;
+      S.imgOff = { x:0, y:0 };
+      ['eq','ft','et','th'].forEach(p => {
+        document.getElementById(p+'-empty').style.display = 'none';
+        document.getElementById(p+'-content').style.display = 'flex';
+      });
+      initMask();
+      renderAll();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+// ═══════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════
+function switchTab(name, btn) {
+  S.tab = name;
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════
+// CANVAS FIT
+// ═══════════════════════════════════════════
+function fitCanvas(areaId, img) {
+  const a = document.getElementById(areaId);
+  const aw = a.clientWidth, ah = a.clientHeight;
+  const ir = img.width / img.height, ar = aw / ah;
+  return ir > ar ? { cw:aw, ch:Math.round(aw/ir) } : { ch:ah, cw:Math.round(ah*ir) };
+}
+
+// ═══════════════════════════════════════════
+// BOX BLUR — pure pixel math, no CSS filter
+// radius: number of pixels (1 = 3×3 kernel, 2 = 5×5, etc.)
+// ═══════════════════════════════════════════
+function boxBlur(src, w, h, radius) {
+  if (radius < 1) return src;
+  const dst = new Uint8ClampedArray(src.length);
+  const r = radius;
+  const size = (2*r+1) * (2*r+1);
+
+  for (let y=0; y<h; y++) {
+    for (let x=0; x<w; x++) {
+      let sr=0, sg=0, sb=0, sa=0, count=0;
+      for (let ky=-r; ky<=r; ky++) {
+        const ny = Math.min(h-1, Math.max(0, y+ky));
+        for (let kx=-r; kx<=r; kx++) {
+          const nx = Math.min(w-1, Math.max(0, x+kx));
+          const i = (ny*w+nx)*4;
+          sr+=src[i]; sg+=src[i+1]; sb+=src[i+2]; sa+=src[i+3];
+          count++;
+        }
+      }
+      const o = (y*w+x)*4;
+      dst[o]  = sr/count;
+      dst[o+1]= sg/count;
+      dst[o+2]= sb/count;
+      dst[o+3]= sa/count;
+    }
+  }
+  return dst;
+}
+
+// ═══════════════════════════════════════════
+// CORE FILTER PIPELINE — returns Uint8ClampedArray
+// ═══════════════════════════════════════════
+function applyFilterPipeline(cw, ch) {
+  const img = S.img; // caller may have temporarily swapped S.img to a cropped canvas
+
+  // Draw source to offscreen
+  const off = document.createElement('canvas');
+  off.width = cw; off.height = ch;
+  const octx = off.getContext('2d');
+  octx.drawImage(img, 0, 0, cw, ch);
+  const id = octx.getImageData(0, 0, cw, ch);
+  let d = id.data;
+
+  // 1. Blur (box blur, radius maps 0–8 slider to 0–4 pixels, 2 passes for smoothness)
+  const blurRadius = Math.round(S.filters.d / 2);
+  if (blurRadius > 0) {
+    d = boxBlur(d, cw, ch, blurRadius);
+    d = boxBlur(d, cw, ch, blurRadius); // second pass = smoother
+  }
+
+  // 2. Brightness + Contrast + P&B
+  const br = S.filters.b * 2.55;
+  const cf = (259*(S.filters.c+255)) / (255*(259-S.filters.c));
+  const pb = S.filters.p / 100;
+
+  for (let i=0; i<d.length; i+=4) {
+    let r=d[i], g=d[i+1], b=d[i+2];
+    r+=br; g+=br; b+=br;
+    r=cf*(r-128)+128; g=cf*(g-128)+128; b=cf*(b-128)+128;
+    const gr = .299*r + .587*g + .114*b;
+    r = r*(1-pb) + gr*pb;
+    g = g*(1-pb) + gr*pb;
+    b = b*(1-pb) + gr*pb;
+    d[i]  = Math.max(0,Math.min(255,r));
+    d[i+1]= Math.max(0,Math.min(255,g));
+    d[i+2]= Math.max(0,Math.min(255,b));
+  }
+  return d;
+}
+
+// Returns an offscreen canvas cropped to the mask region, fitted to the target area.
+// The mask lives in eq-canvas coordinate space; we convert back to source image pixels.
+function getMaskedCanvas(areaId) {
+  const img = S.img; if (!img) return null;
+
+  // 1. Mask coords are in eq-canvas space — get that canvas size
+  const eqArea = document.getElementById('eq-area');
+  const eqW = eqArea.clientWidth, eqH = eqArea.clientHeight;
+  const ir = img.width / img.height, ar = eqW / eqH;
+  const canvW = ir > ar ? eqW : Math.round(eqH * ir);
+  const canvH = ir > ar ? Math.round(eqW / ir) : eqH;
+
+  // 2. Convert mask rect → source image pixel coordinates
+  // The image was drawn at (0,0) with size canvW×canvH (plus imgOff pan)
+  const scaleX = img.width  / canvW;
+  const scaleY = img.height / canvH;
+  // Subtract pan offset before scaling
+  const srcX = Math.max(0, (S.mask.x - S.imgOff.x) * scaleX);
+  const srcY = Math.max(0, (S.mask.y - S.imgOff.y) * scaleY);
+  const srcW = Math.min(img.width  - srcX, S.mask.w * scaleX);
+  const srcH = Math.min(img.height - srcY, S.mask.h * scaleY);
+
+  // 3. Fit the cropped region into the target area maintaining aspect ratio
+  const area = document.getElementById(areaId);
+  const aw = area.clientWidth, ah = area.clientHeight;
+  const cropRatio = srcW / srcH;
+  const areaRatio  = aw / ah;
+  const outW = cropRatio > areaRatio ? aw : Math.round(ah * cropRatio);
+  const outH = cropRatio > areaRatio ? Math.round(aw / cropRatio) : ah;
+
+  // 4. Draw cropped source onto output canvas
+  const off = document.createElement('canvas');
+  off.width = outW; off.height = outH;
+  off.getContext('2d').drawImage(img, srcX, srcY, srcW, srcH, 0, 0, outW, outH);
+  return { off, outW, outH };
+}
+
+// Puts filtered+masked pixels onto a canvas
+function renderFiltered(canvasId, areaId) {
+  const img = S.img; if (!img) return null;
+  const canvas = document.getElementById(canvasId);
+  const masked = getMaskedCanvas(areaId);
+  if (!masked) return null;
+  const { off, outW, outH } = masked;
+  canvas.width = outW; canvas.height = outH;
+  canvas.style.width = outW+'px'; canvas.style.height = outH+'px';
+  // Temporarily swap S.img to the cropped offscreen for the filter pipeline
+  const origImg = S.img;
+  S.img = off; // applyFilterPipeline uses S.img
+  // Redraw off into itself so drawImage in pipeline works correctly
+  const d = applyFilterPipeline(outW, outH);
+  S.img = origImg;
+  const ctx = canvas.getContext('2d');
+  const id = ctx.createImageData(outW, outH);
+  id.data.set(d);
+  ctx.putImageData(id, 0, 0);
+  return { ctx, cw: outW, ch: outH, d };
+}
+
+// Returns filtered pixel data for a masked crop (used by renderEt, renderTh)
+function getMaskedFilteredData(areaId) {
+  const img = S.img; if (!img) return null;
+  const masked = getMaskedCanvas(areaId);
+  if (!masked) return null;
+  const { off, outW, outH } = masked;
+  const origImg = S.img;
+  S.img = off;
+  const d = applyFilterPipeline(outW, outH);
+  S.img = origImg;
+  return { d, cw: outW, ch: outH };
+}
+
+// ═══════════════════════════════════════════
+// ENQUADRAMENTO
+// ═══════════════════════════════════════════
+function initMask() {
+  if (!S.img) return;
+  const { cw, ch } = fitCanvas('eq-area', S.img);
+  const pw = S.orient==='landscape' ? Math.max(S.paperW,S.paperH) : Math.min(S.paperW,S.paperH);
+  const ph = S.orient==='landscape' ? Math.min(S.paperW,S.paperH) : Math.max(S.paperW,S.paperH);
+  const pr = pw / ph;
+  let mw, mh;
+  if (pr > cw/ch) { mw = cw*.85; mh = mw/pr; }
+  else            { mh = ch*.85; mw = mh*pr; }
+  S.mask = { x:(cw-mw)/2, y:(ch-mh)/2, w:mw, h:mh };
+}
+
+function onPaperChange() {
+  S.paperW = parseFloat(document.getElementById('pw').value)||21;
+  S.paperH = parseFloat(document.getElementById('ph').value)||29.7;
+  initMask(); renderEq();
+}
+
+function toggleOrient() {
+  S.orient = S.orient==='portrait' ? 'landscape' : 'portrait';
+  document.getElementById('orientBtn').textContent = S.orient==='portrait' ? '↕ Ret.' : '↔ Pais.';
+  initMask(); renderEq();
+}
+
+function toggleOv(key) {
+  S.ov[key] = !S.ov[key];
+  document.getElementById('btn-'+key).classList.toggle('on', S.ov[key]);
+  renderEq();
+}
+
+function renderEq() {
+  const img = S.img; if (!img) return;
+  const canvas = document.getElementById('eq-canvas');
+  const { cw, ch } = fitCanvas('eq-area', img);
+  canvas.width = cw; canvas.height = ch;
+  canvas.style.width = cw+'px'; canvas.style.height = ch+'px';
+  const ctx = canvas.getContext('2d');
+
+  ctx.save();
+  ctx.translate(S.imgOff.x, S.imgOff.y);
+  ctx.drawImage(img, 0, 0, cw, ch);
+  ctx.restore();
+
+  const { x, y, w, h } = S.mask;
+  ctx.fillStyle = 'rgba(0,0,0,.62)';
+  ctx.fillRect(0,0,cw,y); ctx.fillRect(0,y+h,cw,ch-y-h);
+  ctx.fillRect(0,y,x,h); ctx.fillRect(x+w,y,cw-x-w,h);
+
+  ctx.strokeStyle='rgba(232,197,71,.95)'; ctx.lineWidth=1.5; ctx.setLineDash([]);
+  ctx.strokeRect(x+.75,y+.75,w-1.5,h-1.5);
+
+  const hs=13; ctx.fillStyle='rgba(232,197,71,.9)';
+  [[x,y],[x+w-hs,y],[x,y+h-hs],[x+w-hs,y+h-hs]].forEach(([cx,cy])=>ctx.fillRect(cx,cy,hs,hs));
+
+  if (S.ov.tercos) {
+    ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=.8; ctx.setLineDash([3,4]);
+    for (let i=1;i<=2;i++){
+      const lx=x+(w/3)*i; ctx.beginPath();ctx.moveTo(lx,y);ctx.lineTo(lx,y+h);ctx.stroke();
+      const ly=y+(h/3)*i; ctx.beginPath();ctx.moveTo(x,ly);ctx.lineTo(x+w,ly);ctx.stroke();
+    }
+    ctx.setLineDash([]); ctx.fillStyle='rgba(232,197,71,.9)';
+    for (let i=1;i<=2;i++) for (let j=1;j<=2;j++){
+      ctx.beginPath();ctx.arc(x+(w/3)*i,y+(h/3)*j,3.5,0,Math.PI*2);ctx.fill();
+    }
+  }
+  if (S.ov.diag) {
+    ctx.setLineDash([5,4]); ctx.strokeStyle='rgba(232,197,71,.4)'; ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y+h);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+w,y);ctx.lineTo(x,y+h);ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  if (S.ov.centro) {
+    const cx=x+w/2,cy=y+h/2;
+    ctx.setLineDash([2,6]); ctx.strokeStyle='rgba(232,197,71,.35)'; ctx.lineWidth=.8;
+    ctx.beginPath();ctx.moveTo(cx,y);ctx.lineTo(cx,y+h);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x,cy);ctx.lineTo(x+w,cy);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.strokeStyle='rgba(232,197,71,.6)'; ctx.lineWidth=1.2;
+    ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);ctx.stroke();
+  }
+}
+
+// TOUCH INTERACTION
+(function(){
+  let mode=null,st=null,sm=null,si=null,sd=null,ss=null;
+  const HIT=26;
+  function getPos(e){
+    const c=document.getElementById('eq-canvas');
+    const r=c.getBoundingClientRect();
+    const sx=c.width/r.width, sy=c.height/r.height;
+    if(e.touches){
+      const t0=e.touches[0],t1=e.touches[1];
+      return{x:(t0.clientX-r.left)*sx,y:(t0.clientY-r.top)*sy,
+             x2:t1?(t1.clientX-r.left)*sx:null,y2:t1?(t1.clientY-r.top)*sy:null,n:e.touches.length};
+    }
+    return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy,n:1};
+  }
+  function inMask(px,py){const{x,y,w,h}=S.mask;return px>x&&px<x+w&&py>y&&py<y+h}
+  function inCorner(px,py){
+    const{x,y,w,h}=S.mask;
+    return[[x,y],[x+w,y],[x,y+h],[x+w,y+h]].some(([cx,cy])=>Math.abs(px-cx)<HIT&&Math.abs(py-cy)<HIT);
+  }
+  function onStart(e){
+    if(!S.img||S.tab!=='eq')return; e.preventDefault();
+    const p=getPos(e);
+    if(p.n===2){mode='r2';sd=Math.hypot(p.x2-p.x,p.y2-p.y);ss={...S.mask};}
+    else if(inCorner(p.x,p.y)){mode='r1';st={x:p.x,y:p.y};ss={...S.mask};}
+    else if(inMask(p.x,p.y)){mode='mm';st={x:p.x,y:p.y};sm={...S.mask};}
+    else{mode='mi';st={x:p.x,y:p.y};si={...S.imgOff};}
+  }
+  function onMove(e){
+    if(!mode)return; e.preventDefault();
+    const p=getPos(e);
+    if(mode==='r2'&&p.n===2){
+      const dist=Math.hypot(p.x2-p.x,p.y2-p.y),scale=dist/sd,pr=ss.w/ss.h;
+      const nw=Math.max(40,ss.w*scale),nh=nw/pr;
+      const cx=ss.x+ss.w/2,cy=ss.y+ss.h/2;
+      S.mask={x:cx-nw/2,y:cy-nh/2,w:nw,h:nh};
+    } else if(mode==='r1'){
+      const pr=ss.w/ss.h,delta=((p.x-st.x)+(p.y-st.y))/2;
+      const nw=Math.max(40,ss.w+delta);
+      S.mask.w=nw;S.mask.h=nw/pr;
+    } else if(mode==='mm'){
+      S.mask.x=sm.x+(p.x-st.x);S.mask.y=sm.y+(p.y-st.y);
+    } else if(mode==='mi'){
+      S.imgOff.x=si.x+(p.x-st.x);S.imgOff.y=si.y+(p.y-st.y);
+    }
+    renderEq();
+  }
+  function onEnd(){mode=null;}
+  document.addEventListener('DOMContentLoaded',()=>{
+    const c=document.getElementById('eq-canvas');
+    c.addEventListener('touchstart',onStart,{passive:false});
+    c.addEventListener('touchmove',onMove,{passive:false});
+    c.addEventListener('touchend',onEnd);
+    c.addEventListener('mousedown',onStart);
+    window.addEventListener('mousemove',onMove);
+    window.addEventListener('mouseup',onEnd);
+  });
+})();
+
+// ═══════════════════════════════════════════
+// VALORES TONAIS
+// ═══════════════════════════════════════════
+function applyPreset(name, btn) {
+  const p = PRESETS[name]; S.filters={...p};
+  ['b','c','d','p'].forEach(k=>{document.getElementById('sl-'+k).value=p[k];});
+  updateSV();
+  document.querySelectorAll('.prow .pill').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderFt(); renderEt(); renderTh();
+}
+
+function onSlider() {
+  ['b','c','d','p'].forEach(k=>{S.filters[k]=parseFloat(document.getElementById('sl-'+k).value);});
+  updateSV();
+  document.querySelectorAll('.prow .pill').forEach(b=>b.classList.remove('on'));
+  renderFt(); renderEt(); renderTh();
+}
+
+function updateSV() {
+  ['b','c','d','p'].forEach(k=>{document.getElementById('sv-'+k).textContent=S.filters[k];});
+}
+
+function renderFt() {
+  if (!S.img) return;
+  renderFiltered('ft-canvas','ft-area');
+}
+
+// ═══════════════════════════════════════════
+// ETAPAS
+// ═══════════════════════════════════════════
+function selectEtapa(idx, btn) {
+  S.etapa=idx;
+  document.querySelectorAll('.etab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const et=ETAPAS[idx];
+  document.getElementById('et-name').textContent=et.name;
+  document.getElementById('et-desc').textContent=et.desc;
+  renderEt();
+}
+
+function renderEt() {
+  const img=S.img; if(!img) return;
+  const et=ETAPAS[S.etapa];
+  const canvas=document.getElementById('et-canvas');
+  const res=getMaskedFilteredData('et-area'); if(!res) return;
+  const {d:src,cw,ch}=res;
+  canvas.width=cw; canvas.height=ch;
+  canvas.style.width=cw+'px'; canvas.style.height=ch+'px';
+  const ctx=canvas.getContext('2d');
+  const out=new Uint8ClampedArray(src.length);
+  // accent: #e8c547 = 232, 197, 71
+  const aR=232, aG=197, aB=71;
+  for(let i=0;i<src.length;i+=4){
+    const r=src[i],g=src[i+1],b=src[i+2];
+    const lum=Math.round(.299*r+.587*g+.114*b);
+    if(lum>=et.min&&lum<=et.max){
+      // luminance within range → modulate yellow intensity (darker areas = deeper yellow)
+      const t=(lum-et.min)/Math.max(1,et.max-et.min);
+      const intensity=0.5+t*0.5;
+      out[i]  =Math.min(255,aR*intensity);
+      out[i+1]=Math.min(255,aG*intensity);
+      out[i+2]=Math.min(255,aB*intensity);
+    } else {
+      // dimmed grayscale for everything outside active range
+      const v=Math.round(lum*0.14);
+      out[i]=out[i+1]=out[i+2]=v;
+    }
+    out[i+3]=255;
+  }
+  const id=ctx.createImageData(cw,ch); id.data.set(out); ctx.putImageData(id,0,0);
+}
+
+// ═══════════════════════════════════════════
+// THRESHOLD / POSTERIZAÇÃO
+// ═══════════════════════════════════════════
+function setTones(n, btn) {
+  S.tones=n;
+  document.querySelectorAll('.tone-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderTh();
+}
+
+function renderTh() {
+  const img=S.img; if(!img) return;
+  const canvas=document.getElementById('th-canvas');
+  const res=getMaskedFilteredData('th-area'); if(!res) return;
+  const {d:src,cw,ch}=res;
+  canvas.width=cw; canvas.height=ch;
+  canvas.style.width=cw+'px'; canvas.style.height=ch+'px';
+  const ctx=canvas.getContext('2d');
+
+  const n=S.tones;
+  const levels=[];
+  for(let i=0;i<n;i++) levels.push(Math.round(i*(255/(n-1))));
+
+  const out=new Uint8ClampedArray(src.length);
+
+  for(let i=0;i<src.length;i+=4){
+    const r=src[i],g=src[i+1],b=src[i+2];
+    const lum=.299*r+.587*g+.114*b;
+    // Find nearest level
+    let best=0, bestDist=999;
+    for(const lv of levels){
+      const dist=Math.abs(lv-lum);
+      if(dist<bestDist){bestDist=dist;best=lv;}
+    }
+    // Preserve hue: scale each channel proportionally
+    const scale = lum > 0 ? best/lum : 0;
+    out[i]  =Math.min(255,r*scale);
+    out[i+1]=Math.min(255,g*scale);
+    out[i+2]=Math.min(255,b*scale);
+    out[i+3]=255;
+  }
+  const id=ctx.createImageData(cw,ch); id.data.set(out); ctx.putImageData(id,0,0);
+
+  // Update swatches
+  const sw=document.getElementById('thr-swatches');
+  sw.innerHTML='';
+  levels.forEach(lv=>{
+    const d=document.createElement('div');
+    d.className='thr-swatch';
+    d.style.background=`rgb(${lv},${lv},${lv})`;
+    d.title=`Lum ${lv}`;
+    sw.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════
+// RENDER ALL + SAVE
+// ═══════════════════════════════════════════
+function renderAll(){ renderEq(); renderFt(); renderEt(); renderTh(); }
+
+function saveCanvas(id, name) {
+  const canvas = document.getElementById(id);
+  const url = canvas.toDataURL('image/png');
+  // iOS Safari blocks programmatic <a download> — open in new tab instead
+  // User can then long-press → "Add to Photos" or "Save Image"
+  const w = window.open('', '_blank');
+  if (w) {
+    w.document.write('<html><head><title>' + name + '</title></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="' + url + '" style="max-width:100%;max-height:100vh"><p style="position:fixed;bottom:16px;left:0;right:0;text-align:center;color:#888;font-family:sans-serif;font-size:12px">Pressione e segure a imagem → Salvar</p></body></html>');
+    w.document.close();
+  } else {
+    // Fallback for desktop
+    const a = document.createElement('a');
+    a.download = name; a.href = url; a.click();
+  }
+}
+
+// ═══════════════════════════════════════════
+// RESIZE OBSERVER
+// ═══════════════════════════════════════════
+const ro=new ResizeObserver(()=>{if(S.img){initMask();renderAll();}});
+['eq-area','ft-area','et-area','th-area'].forEach(id=>ro.observe(document.getElementById(id)));
+</script>
+</body>
+</html>
